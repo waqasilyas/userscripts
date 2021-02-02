@@ -1,4 +1,4 @@
-# Ed Discussions Compact View
+## Ed Discussions Compact View
 
 ![Before and After](screenshot.png)
 
