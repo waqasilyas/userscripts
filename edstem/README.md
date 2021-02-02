@@ -2,5 +2,4 @@
 
 ![Before and After](screenshot.png)
 
-> This is free software; see the source for copying conditions.  There is NO
-> warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+> This is free and provided AS-IS; There is NO warranty.
