@@ -48,6 +48,10 @@
 .discuss-show-full-wi {
   max-width: 90% !important;
 }
+
+.dft-thread-count-new-wi {
+  font-size: 70% !important;
+}
   `);
   
   var initialWidthSet = false;
@@ -65,7 +69,10 @@
 
   function applyUpdates() {
     var selector = $('.split-divider');
-    if (selector.length == 0) return; // Not available yet     
+    if (selector.length == 0)
+      // HTML of our interest not available yet
+      return;
+    
     selector.addClass('split-divider-wi');
 
     // Allow wider threads panel
@@ -77,18 +84,18 @@
 
     // Compact post tiles in the list
     selector = $('a.discuss-feed-thread');
-    if (selector.length == 0) return;
-    selector.addClass('discuss-feed-thread-wi');
+    if (selector.length > 0)
+      selector.addClass('discuss-feed-thread-wi');
 
     // Hide all the footers, we will accomadate useful information into dft-body
     selector = $('a.discuss-feed-thread footer');
-    if (selector.length == 0) return;
-    selector.hide();
+    if (selector.length > 0)
+      selector.hide();
 
     // Selector for post tiles, compact even more
     var dftBodySelector = $('a.discuss-feed-thread .dft-body');
-    if (dftBodySelector.length == 0) return;
-    dftBodySelector.addClass('dft-body-wi');
+    if (dftBodySelector.length > 0)
+      dftBodySelector.addClass('dft-body-wi');
 
     // Make changes to each tile
     dftBodySelector.each(function(i, o) {
@@ -103,6 +110,18 @@
 
       // Check if the post is from an instructor
       var footer = dftBody.parent().find('footer');
+      
+      // Number of new unread messages
+      var newRepliesSpan = footer.find('.dft-thread-count > span.dft-thread-count-new')
+      if (newRepliesSpan.length > 0) {
+        console.log(newRepliesSpan.children().length);
+        if (dftBody.find('.dft-thread-count-new').length == 0)
+          dftBody.find('.dft-thread-title').after(`
+            <span title="New Replies" class="dft-thread-count-new dft-thread-count-new-wi">
+              ${newRepliesSpan.html()}
+            </span>
+          `);
+      }
 
       // Author name
       var authorSpan = footer.find('.dft-foot-fill > span.dft-thread-user');
