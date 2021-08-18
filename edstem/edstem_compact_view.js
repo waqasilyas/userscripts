@@ -9,6 +9,7 @@
 // @require       http://code.jquery.com/jquery-latest.js
 // @run-at        document-start
 // @licence       MIT
+// jshint esversion: 6
 // ==/UserScript==
 (function() {
   'use strict';
@@ -78,7 +79,7 @@
     // Allow wider threads panel
     if (!initialWidthSet) {
       initialWidthSet = true;
-      var threadsPanel = $('section.dif-tf-container').get(0)
+      var threadsPanel = $('section.dif-tf-container').get(0);
       threadsPanel.parentElement.style = "flex: 0 0 650px";
     }
 
@@ -106,13 +107,13 @@
       if (unseenIcons.length > 0)
         dftBody.addClass('dft-body-unseen-wi');
       else
-        dftBody.removeClass('dft-body-unseen-wi')
+        dftBody.removeClass('dft-body-unseen-wi');
 
       // Check if the post is from an instructor
       var footer = dftBody.parent().find('footer');
       
       // Number of new unread messages
-      var newRepliesSpan = footer.find('.dft-thread-count > span.dft-thread-count-new')
+      var newRepliesSpan = footer.find('.dft-thread-count > span.dft-thread-count-new');
       if (newRepliesSpan.length > 0) {
         console.log(newRepliesSpan.children().length);
         if (dftBody.find('.dft-thread-count-new').length == 0)
@@ -146,7 +147,7 @@
 
       // Handle category, add a tag for it
       var catDiv = footer.find('.dft-foot-fill > .dft-thread-category-group');
-      var catColor = catDiv.get(0).style.color
+      var catColor = catDiv.get(0).style.color;
       var catSpan = footer.find('.dft-foot-fill > .dft-thread-category-group > span');
       var category = catSpan.html();
       if (dftBody.find('span.dft-category-wi').length == 0)
