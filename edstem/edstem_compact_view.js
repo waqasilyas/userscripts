@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name          Compact View on Ed Discussions
 // @namespace     waqas
-// @description   Reduces amount of space used by each post tile in the list view, by compacting each post to a single line. Also reduces some whitespace in messages panel.
+// @description   Reduces amount of space used by each post tile in the list view, by compacting each post to a single line on Ed discussion forum. Also reduces some whitespace in messages panel.
 // @match         *://edstem.org/*
 // @grant         GM_addStyle
 // @version       0.1
