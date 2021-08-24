@@ -6,6 +6,7 @@
 // @grant         GM_addStyle
 // @version       0.1
 // @author        Waqas Ilyas
+// @homepageURL   https://github.com/waqasilyas/userscripts/tree/main/edstem
 // @require       http://code.jquery.com/jquery-latest.js
 // @run-at        document-start
 // @licence       MIT
@@ -44,6 +45,10 @@
   background-color: #eee;
   padding: 0 2px 0 2px;
   margin: 0 2px 0 2px;
+}
+
+.theme-dark .dft-author-wi {
+  background-color: #3f3e41 !important;
 }
 
 .discuss-show-full-wi {
