@@ -84,7 +84,7 @@
     // Allow wider threads panel
     if (!initialWidthSet) {
       initialWidthSet = true;
-      var threadsPanel = $('section.dif-tf-container').get(0);
+      var threadsPanel = $('section.disindf-tf-container').get(0);
       threadsPanel.parentElement.style = "flex: 0 0 650px";
     }
 
