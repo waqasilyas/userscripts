@@ -34,6 +34,10 @@
   padding: 0 5px 0 5px !important;
 }
 
+.dft-body-seen-wi {
+  color: var(--text-lightest);
+}
+
 .dft-category-wi {
   margin: 0 2px 0 2px;
 }
@@ -55,7 +59,7 @@
   max-width: 90% !important;
 }
 
-.dft-thread-count-new-wi {
+.dft-count-new-wi {
   font-size: 70% !important;
 }
   `);
@@ -108,53 +112,65 @@
       var dftBody = $(o);
 
       // Adjust padding so that unread and read posts are aligned
-      var unseenIcons = dftBody.find('.dft-thread-unseen-icon');
-      if (unseenIcons.length > 0)
+      var unseenIcons = dftBody.find('.dft-unseen-icon');
+      if (unseenIcons.length > 0) {
         dftBody.addClass('dft-body-unseen-wi');
-      else
+        dftBody.removeClass('dft-body-seen-wi');
+      }
+      else {
         dftBody.removeClass('dft-body-unseen-wi');
+        dftBody.addClass('dft-body-seen-wi');
+      }
 
       // Check if the post is from an instructor
       var footer = dftBody.parent().find('footer');
       
       // Number of new unread messages
-      var newRepliesSpan = footer.find('.dft-thread-count > span.dft-thread-count-new');
+      var newRepliesSpan = footer.find('.dft-count > span.dft-count-new');
       if (newRepliesSpan.length > 0) {
         console.log(newRepliesSpan.children().length);
-        if (dftBody.find('.dft-thread-count-new').length == 0)
-          dftBody.find('.dft-thread-title').after(`
-            <span title="New Replies" class="dft-thread-count-new dft-thread-count-new-wi">
+        if (dftBody.find('.dft-count-new').length == 0)
+          dftBody.find('.dft-title').after(`
+            <span title="New Replies" class="dft-count-new dft-count-new-wi">
               ${newRepliesSpan.html()}
             </span>
           `);
       }
 
       // Author name
-      var authorSpan = footer.find('.dft-foot-fill > span.dft-thread-user');
+      var authorSpan = footer.find('.dft-foot-fill > span.dft-user');
 
       // Handle author's role
       var roleDiv = footer.find('.dft-foot-fill > div.user-role-label');
-      if (dftBody.find('span.dft-author-wi').length == 0) {
+      if (dftBody.find('.dft-author-wi').length == 0) {
         var role = 'S';
         var roleClass = 'url-student';
-        if (roleDiv.hasClass('url-admin')) {
-          role = 'I';
-          roleClass = 'url-admin';
-        }
-
+        var roleSegment = ''
+        
         // Add an author tag, with initials
-        dftBody.append(`
-          <span title='${authorSpan.html()}' class='dft-author-wi ${roleClass}'>
-            ${authorSpan.html().split(' ').map((n) => n[0]).slice(0, 3).join('')}
-          </span>
-        `);
+        if (roleDiv.hasClass('url-admin')) {
+          dftBody.append(`
+            <div class="user-role-label dft-user-role dft-author-wi url-admin">
+              <span title='${roleDiv.find('span').html().trim()}: ${authorSpan.html()}' class='url-segment'>
+                ${authorSpan.html().split(' ').map((n) => n[0]).slice(0, 3).join('')}
+              </span>
+            </div>
+          `);
+        }
+        else {
+          dftBody.append(`
+            <span title='${authorSpan.html()}' class='user-role-label dft-user-role dft-author-wi'>
+              ${authorSpan.html().split(' ').map((n) => n[0]).slice(0, 3).join('')}
+            </span>
+          `);
+        }
       }
 
       // Handle category, add a tag for it
-      var catDiv = footer.find('.dft-foot-fill > .dft-thread-category-group');
-      var catColor = catDiv.get(0).style.color;
-      var catSpan = footer.find('.dft-foot-fill > .dft-thread-category-group > span');
-      var category = catSpan.html();
+      var catSpan = footer.find('.dft-foot-fill > .dft-category');
+      var catColor = catSpan.get(0).style.color;
+      //var catSpan = footer.find('.dft-foot-fill > .dft-thread-category-group > span');
+      var category = catSpan.find('span').html();
       if (dftBody.find('span.dft-category-wi').length == 0)
         dftBody.append(`
           <span title='${category}'
