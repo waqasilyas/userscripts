@@ -89,7 +89,7 @@
     if (!initialWidthSet) {
       initialWidthSet = true;
       var threadsPanel = $('section.disindf-tf-container').get(0);
-      threadsPanel.parentElement.style = "flex: 0 0 650px";
+      threadsPanel.parentElement.style = "flex: 0 0 35%";
     }
 
     // Compact post tiles in the list
